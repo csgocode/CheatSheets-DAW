@@ -177,3 +177,51 @@ Instalación del servidor de aplicaciones Apache Tomcat en su última versión d
 4. Comprobar el estado de Tomcat:
    `sudo systemctl status tomcat10`
 5. Acceder a `http://IP_SERVIDOR:8080/manager` y `http://IP_SERVIDOR:8080/host-manager` con el usuario y contraseña creados.
+
+
+### Despliegue Manual en Tomcat
+1. **Acceso al Gestor de Aplicaciones Web**: 
+   - Acceder a la interfaz web de Tomcat usando `http://IP_SERVIDOR:8080/manager/html`.
+   - Autenticarse con las credenciales configuradas.
+
+2. **Despliegue de la Aplicación**:
+   - En la sección "WAR file to deploy", seleccionar el archivo `.war` de la aplicación.
+   - Hacer clic en "Deploy" para iniciar el despliegue.
+
+3. **Verificación**:
+   - La aplicación desplegada aparecerá en la lista de aplicaciones en el gestor de Tomcat.
+   - Acceder a la aplicación mediante `http://IP_SERVIDOR:8080/nombreAplicacion`.
+
+### Comandos Útiles en Tomcat
+- **Replegar**: Para desinstalar una aplicación.
+- **Reiniciar**: Para reiniciar una aplicación y reflejar cambios.
+
+## Uso de Maven para Gestión de Proyectos Java
+
+### Instalación de Maven
+`sudo apt-get update`
+`sudo apt-get install maven`
+
+## Verificación de la instalación
+`mvn -v`
+
+## Configuración de Usuario en Tomcat:
+Añadir un usuario con el rol manager-script en tomcat-users.xml.
+`xml <role rolename="admin-gui"/> <role rolename="manager-gui"/> <role rolename="manager-script"/> <user username="admin" password="ieselcaminas" roles="admin-gui,manager-gui"/> <user username="despliegues" password="ieselcaminas" roles="manager-script"/>`
+
+## Configuración de Maven:
+Editar settings.xml de Maven para añadir el servidor Tomcat.
+Especificar el ID del servidor, usuario y contraseña.
+
+## Clonar o Crear un Proyecto:
+Para proyectos existentes, clonar el repositorio.
+Para nuevos proyectos, usar `mvn archetype:generate`.
+
+## Despliegue del Proyecto:
+Ejecutar `mvn tomcat7:deploy` para desplegar el proyecto en Tomcat.
+Comandos Maven para Gestión de Proyectos
+Compilar Proyecto: `mvn compile`.
+Empaquetar Proyecto: `mvn package`.
+Ejecutar Tests: `mvn test`.
+Limpiar Proyecto: `mvn clean`.
+Instalar Proyecto en Repositorio Local: `mvn install`.
