@@ -164,13 +164,13 @@ Instalación del servidor de aplicaciones Apache Tomcat en su última versión d
 
 ## Gestión Gráfica de Tomcat y Creación de Usuario
 1. Para gestionar Tomcat gráficamente, acceder a `http://IP_SERVIDOR:8080/manager`.
-2. Crear un usuario de Tomcat modificando `/etc/tomcat10/tomcat-users.xml`:
-sudo vi /etc/tomcat10/tomcat-users.xml
+2. Crear un usuario de Tomcat modificando /etc/tomcat10/tomcat-users.xml:
+`sudo vi /etc/tomcat10/tomcat-users.xml`
 
 ## Añadir las siguientes líneas antes del cierre </tomcat-users>:
-   `<role rolename="manager-gui"/>`
-   `<role rolename="admin-gui"/>`
-   `<user username="admin" password="ieselcaminas" roles="admin-gui,manager-gui"/>`
+   `<role rolename="manager-gui"/>
+   <role rolename="admin-gui"/>
+   <user username="admin" password="ieselcaminas" roles="admin-gui,manager-gui"/>`
 
 3. Reiniciar Tomcat:
    `sudo systemctl restart tomcat10`
