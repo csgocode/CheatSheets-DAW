@@ -225,3 +225,153 @@ Empaquetar Proyecto: `mvn package`.
 Ejecutar Tests: `mvn test`.
 Limpiar Proyecto: `mvn clean`.
 Instalar Proyecto en Repositorio Local: `mvn install`.
+
+## Instalación de Node JS
+# Actualizar e instalar dependencias necesarias
+`sudo apt-get update`
+`sudo apt-get install -y ca-certificates curl gnupg`
+
+# Descargar e importar la clave GPG de Nodesource
+`curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg`
+
+# Crear el repositorio deb para Node.js
+NODE_MAJOR=20  # O cambiar por la versión deseada
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+
+# Ejecutar la actualización e instalar Node.js
+`sudo apt-get update`
+`sudo apt-get install nodejs -y`
+
+# Verificar la instalación de Node.js y npm
+`node --version`
+`npm --version`
+
+# Instalar Express globalmente
+`sudo npm install -g express`
+
+# Actualizar npm si es necesario
+`sudo npm install -g npm@<version>`
+
+# Despliegue de una aplicación de terceros
+`git clone <url_del_repositorio>`
+
+# Acceder al directorio del proyecto clonado
+`cd <nombre_del_directorio>`
+
+# Instalar las dependencias del proyecto
+`npm install`
+
+# Iniciar la aplicación
+`npm run start:dev`
+
+# Despliegue de una Aplicación "Clusterizada" con Node Express
+
+## Introducción
+Optimización del rendimiento de aplicaciones Node.js mediante el uso de clusters para aprovechar múltiples núcleos de CPU.
+
+## Instalación de Node.js y Express
+`sudo apt-get update`
+`sudo apt-get install -y nodejs npm`
+`sudo npm install -g express`
+
+## Uso de PM2 para Administrar Clusters
+Instalar PM2 globalmente.
+`sudo npm install pm2 -g`
+
+## Iniciar la aplicación con PM2 en modo cluster.
+`pm2 start pruebacluster.js -i 0`
+
+## Comprobar el estado de los procesos.
+`pm2 ls`
+
+## Comandos Adicionales de PM2
+Reiniciar, recargar, detener y eliminar aplicaciones.
+`pm2 restart pruebacluster`
+`pm2 reload pruebacluster`
+`pm2 stop pruebacluster`
+`pm2 delete pruebacluster`
+
+## Monitorear logs y métricas.
+`pm2 logs`
+`pm2 monit`
+
+## ¿Qué es Netlify?
+Netlify es un proveedor de alojamiento en la nube para sitios web estáticos, ofreciendo servicios de backend sin servidor. Facilita el despliegue rápido de aplicaciones, conectándose a un repositorio de GitHub y pre-renderizando las páginas en archivos estáticos.
+
+## Preparación del Entorno
+Regístrate en Netlify con tu email y no enlaces tu cuenta de GitHub todavía.
+Crea una instancia EC2 Debian en AWS Academy y conéctate vía SSH.
+Instala GIT y Node.js.
+
+## Opciones de Despliegue en Netlify
+Despliegue Manual desde el CLI de Netlify:
+Instala el CLI de Netlify: `sudo npm install netlify-cli -g`.
+Autentícate con netlify login, generando un token de acceso.
+
+## Despliegue desde un Repositorio de GitHub:
+Clona el repositorio de ejemplo: `git clone https://github.com/StackAbuse/color-shades-generator`.
+Instala dependencias con `npm install` y crea un build de producción con `npm run build`.
+Despliega usando `netlify deploy` y luego `netlify deploy --prod`.
+
+## Despliegue mediante Conexión con GitHub
+Elimina el sitio previamente desplegado en Netlify.
+Descarga y descomprime el código fuente del proyecto.
+Crea un nuevo repositorio en GitHub y sube tu código.
+Enlaza Netlify con tu repositorio de GitHub y despliega la aplicación.
+
+## Despliegue de Aplicaciones Desarrolladas en Angular
+Para aplicaciones Angular, la carpeta de build es `./dist/nombreaplicacion`. Para servir la aplicación desde tu servidor antes del despliegue en Netlify, usa `ng serve -o --host=IPPRIVADA` y accede a través de `http://IPPUBLICA:4200`.
+
+## Despliegue de una Aplicación Flask en EC2 (Debian)
+
+## Actualizar e Instalar pip
+`sudo apt-get update && sudo apt-get upgrade`
+`sudo apt-get install python3-pip`
+
+## Instalar pipenv (Gestión de entornos virtuales)
+`sudo apt-get install pipenv`
+`pipenv --version`
+
+## Configuración del Proyecto
+`sudo mkdir /var/www/practica_flask`
+`sudo chown -R $USER:www-data /var/www/practica_flask`
+`chmod -R 775 /var/www/practica_flask/`
+
+## Crear y Configurar Archivo .env
+`cd /var/www/practica_flask`
+`touch .env`
+# Añadir en .env:
+# FLASK_APP=wsgi.py
+# FLASK_ENV=production
+
+## Activar Entorno Virtual y Dependencias
+`cd /var/www/practica_flask`
+`pipenv shell`
+`pipenv install flask gunicorn`
+
+## Dentro del entorno virtual
+`flask run --host=0.0.0.0`
+
+## Probar Aplicación con Gunicorn
+`gunicorn --workers 2 --bind 0.0.0.0:5000 wsgi:app`
+
+## Configurar Gunicorn como Servicio
+Crear `/etc/systemd/system/flaskapp.service`
+Configurar el servicio con los detalles del proyecto
+## Habilitar y Iniciar el Servicio de Gunicorn
+`systemctl enable flask_app`
+`systemctl start flask_app`
+
+## Instalar y Configurar Nginx
+`sudo apt-get install nginx`
+`sudo systemctl start nginx`
+`sudo systemctl status nginx`
+
+## Configurar Sitio en Nginx
+Crear `/etc/nginx/sites-available/practica_flask`
+Configurar el archivo para el proxy a Gunicorn
+Crear enlace simbólico en /etc/nginx/sites-enabled/
+
+## Verificar y Reiniciar Nginx
+`sudo nginx -t`
+`sudo systemctl restart nginx`
